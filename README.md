@@ -24,7 +24,7 @@ pip install -r requirements.txt
 ```warm-start
 python pretrain.py --dataset_name 'citeseer'
 ```
-- The above command pretrain the discriminators for "citeseer" dataset (with 2000 iterations in default).
+- The above command pretrain the discriminators for 'citeseer' dataset (with 2000 iterations in default).
    
 #### Step 2. To train the differentially private generator:
 ```train
@@ -64,6 +64,6 @@ Our implementation uses the source code from the following repositories:
 
 * [GS-WGAN: A Gradient-Sanitized Approach for Learning Differentially Private Generators (Pytorch)](https://github.com/DingfanChen/GS-WGAN)
 
-* [NetGAN (Tensorflow)](https://github.com/danielzuegner/netgan)
+* [NetGAN: Generating Graphs via Random Walks (Tensorflow)](https://github.com/danielzuegner/netgan)
 
-* [NetGAN (Pytorch)](https://github.com/mmiller96/netgan_pytorch)
+* [NetGAN: Generating Graphs via Random Walks (Pytorch)](https://github.com/mmiller96/netgan_pytorch)
