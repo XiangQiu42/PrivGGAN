@@ -47,7 +47,7 @@ def plot(orig_graph, gen_graph, gen_eps):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Evaluation arguments.')
     parser.add_argument('--dataset', type=str, default='citeseer', help='[cora_ml, dblp, citeseer]')
-    parser.add_argument('--model', default='NetGAN', choices=['GS_WGAN', 'GS_WGAN', 'DPGGAN', 'GGAN'])
+    parser.add_argument('--model', default='NetGAN', choices=['PrivGGAN', 'PrivGGAN', 'DPGGAN', 'GGAN'])
     parser.add_argument('--weight_norm', default=False, type=bool)
     parser.add_argument('--target_epsilon', default='0.2', type=float)
     _args = parser.parse_args()
@@ -62,10 +62,10 @@ if __name__ == '__main__':
         _graph_orig = load_ground_truth(input_dir, name)
         original_graph.append(nx.from_scipy_sparse_array(_graph_orig))
         # _temp = load_graphs(dir_path + f'/data/generated/{_args.model}_{name}_{_args.weight_norm}.pkl')
-        _temp = load_graphs(dir_path + f'/data/generated/GS_WGAN_{name}_3.0_{_args.weight_norm}.pkl')
+        _temp = load_graphs(dir_path + f'/data/generated/PrivGGAN_{name}_3.0_{_args.weight_norm}.pkl')
         generated_graph.append(_temp[0])
 
-        _temp = load_graphs(dir_path + f'/data/generated/GS_WGAN_{name}_0.2_{_args.weight_norm}.pkl')
+        _temp = load_graphs(dir_path + f'/data/generated/PrivGGAN_{name}_0.2_{_args.weight_norm}.pkl')
         gen_eps3.append(_temp[0])
 
     plot(original_graph, generated_graph, gen_eps3)

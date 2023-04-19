@@ -37,7 +37,7 @@ def arg_parser():
     parser.add_argument('--stopping_criterion', type=str, default=None, choices=['val', 'eo'])
 
     # Settings for adding differential privacy
-    parser.add_argument('--dp_method', default="DPSGD", choices=["GS_WGAN", "DPSGD"])
+    parser.add_argument('--dp_method', default="DPSGD", choices=["PrivGGAN", "DPSGD"])
     parser.add_argument('--weight_norm', type=bool, default=False)
     parser.add_argument('--target_epsilon', type=float, default=3.0, help='privacy parameter epsilon')
     parser.add_argument('--target_delta', type=float, default=1e-5, help='desired delta')
@@ -244,7 +244,7 @@ if __name__ == '__main__':
             model_args.noise_mul = common_args.noise_multiplier
 
         # # for a given target epsilon and delta, we compute the noise-multiplier based on post-process theory
-        # if common_args.dp_method == "GS_WGAN" and model_args.noise_mul is None:
+        # if common_args.dp_method == "PrivGGAN" and model_args.noise_mul is None:
         #     assert common_args.target_epsilon
         #     delta = 1e-5
         #     sigma = get_noise_mul(g.N, model_args.batch_size, common_args.target_epsilon,

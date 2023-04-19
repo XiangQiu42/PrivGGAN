@@ -88,7 +88,7 @@ class NetGAN:
                         current_temp := max(temperature_decay*current_temp, min_temperature)
             min_temp: float, default: 0.5
                       The minimal temperature for the Gumbel softmax.
-            dp_method: str in ['GS_WGAN', 'DPSGD'], default is None
+            dp_method: str in ['PrivGGAN', 'DPSGD'], default is None
                 Specify the  GAN-based Differential privacy method
             pretrain_dir: default is None
                 if it is not None, then we load the pretrain discriminators from this dir
@@ -132,7 +132,8 @@ class NetGAN:
         self.dp_method = dp_method
 
         if self.dp_method == 'DPSGD':
-            # used opacus for DPSGD
+            # used opacus for DPSGD,
+            # please Note this part in unfinished now !!!
             from opacus.accountants import RDPAccountant
             from opacus import GradSampleModule
             from opacus.optimizers import DPOptimizer
@@ -176,7 +177,7 @@ class NetGAN:
             # )
             # privacy_engine.attach(self.D_optimizer)
 
-        elif self.dp_method == 'GS_WGAN':
+        elif self.dp_method == 'PrivGGAN':
             # # Register hooks
             global dynamic_hook_function
             # self.discriminator.W_down.register_backward_hook(master_hook_adder)  # used for pytorch < 1.8
@@ -248,7 +249,7 @@ class NetGAN:
         real_inputs = one_hot(torch.tensor(next(self.walker.walk())), num_classes=self.N). \
             type(torch.float64).to(self.device)
 
-        if self.dp_method == 'GS_WGAN':
+        if self.dp_method == 'PrivGGAN':
             global dynamic_hook_function
             dynamic_hook_function = dummy_hook
 
@@ -284,7 +285,7 @@ class NetGAN:
         # Update Generator
 
         global dynamic_hook_function
-        if self.dp_method == "GS_WGAN":
+        if self.dp_method == "PrivGGAN":
             # Sanitize the gradients passed to the Generator
             dynamic_hook_function = dp_hook
         elif self.dp_method == "DP_SGD":

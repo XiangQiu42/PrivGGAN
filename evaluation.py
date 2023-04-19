@@ -58,10 +58,10 @@ def eval_single_list(graphs, graphs_orig):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Evaluation arguments.')
-    parser.add_argument('--dataset', type=str, default='dblp', help='[cora_ml, dblp, citeseer]')
-    parser.add_argument('--model', default='NetGAN', choices=['NetGAN', 'GS_WGAN', 'DPGGAN', 'GGAN'])
+    parser.add_argument('--dataset', type=str, default='citeseer', help='[cora_ml, dblp, citeseer]')
+    parser.add_argument('--model', default='NetGAN', choices=['NetGAN', 'PrivGGAN', 'DPGGAN', 'GGAN'])
     parser.add_argument('--weight_norm', default=False, type=bool)
-    parser.add_argument('--target_epsilon', default='0.2', type=float)
+    parser.add_argument('--target_epsilon', default='3.0', type=float)
     _args = parser.parse_args()
 
     input_dir = dir_path + '/data/orig/'
